@@ -42,6 +42,13 @@ class AppTests(unittest.TestCase):
         self.assertIn("不占用单独段落", html)
         self.assertIn("与右侧文字间距为0.3厘米", html)
         self.assertIn("黑体，三号（16磅），首行缩进两个字符", html)
+        self.assertIn("即使整个职业生涯始终在北京，也必须写这唯一一行地点", html)
+        self.assertIn("每个先后岗位对应独立履历行", html)
+        self.assertIn("首次达到正处写【XX岁，正处】", html)
+        self.assertIn("不能将前后北京任职合并", html)
+        self.assertIn("packetPrompt_v4_", html)
+        self.assertNotIn("首次地点块不另加地点行", html)
+        self.assertNotIn("仅在地点变化时添加", html)
         for obsolete in ("照片独占段落", "嵌入型", "禁止浮动图片", "api/doubao"):
             self.assertNotIn(obsolete, html)
 
