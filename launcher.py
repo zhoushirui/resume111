@@ -1,6 +1,7 @@
 """Local browser UI and Windows executable entry point."""
 import argparse
 import socket
+import sys
 import threading
 import time
 import webbrowser
@@ -27,6 +28,10 @@ def health():
 
 
 def main():
+    # Redirected Windows console streams may otherwise use a legacy encoding.
+    for stream in (sys.stdout, sys.stderr):
+        if stream is not None and hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=18765)
     parser.add_argument("--no-browser", action="store_true")
